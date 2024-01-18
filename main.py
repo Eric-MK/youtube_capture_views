@@ -1,9 +1,9 @@
 import pandas as pd 
-from pytube import Youtube
+from pytube import YouTube
 
 
 def get_youtube_data(video_url):
-    yt = Youtube(video_url)
+    yt = YouTube(video_url)
     
     data = {
         'Title': yt.title,
@@ -19,7 +19,7 @@ def get_youtube_data(video_url):
     return data
 
 def main():
-    video_url = 'YOUR_YOUTUBE_VIDEO_URL'
+    video_url = 'https://www.youtube.com/watch?v=WQ1yc-4KfIU&t=1171s'
     
     video_data = get_youtube_data(video_url)
     
