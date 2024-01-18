@@ -19,7 +19,7 @@ def get_youtube_data(video_url):
     return data
 
 def main():
-    video_url = 'https://www.youtube.com/watch?v=WQ1yc-4KfIU&t=1171s'
+    video_url = 'https://www.youtube.com/watch?v=neBBdTibVBs&t=1618s&ab_channel=PBDPodcast'
     
     video_data = get_youtube_data(video_url)
     
