@@ -7,6 +7,8 @@ def get_youtube_data(api_key, video_id):
     # Get video details
     video_response = youtube.videos().list(part='snippet,liveStreamingDetails', id=video_id).execute()
     
+    print(video_response)
+    
     # Check if 'items' is present in the response and not empty
     if 'items' in video_response and video_response['items']:
         video_details = video_response['items'][0]['snippet']
