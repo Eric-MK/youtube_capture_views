@@ -36,13 +36,13 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'
+    api_key = 'add youtube api key'
     
     ktn_home = "3HKRlDRWdbc"
     ktn_news = "OdIxeE2eWSg"
     citizen_news = "cq3jNiquchw"
     
-    video_ids = [citizen_news, ktn_news , ktn_home]  # Replace with your actual video IDs
+    video_ids = [citizen_news, ktn_news , ktn_home]  
 
 
     videos_data = get_youtube_data(api_key, *video_ids)
