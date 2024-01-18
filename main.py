@@ -23,7 +23,7 @@ def main():
     
     video_data = get_youtube_data(video_url)
     
-    df = pd.DataFrame(video_data)
+    df = pd.DataFrame([video_data])
     
     # Export the DataFrame to an Excel file
     excel_filename = 'output/youtube_data.xlsx'
