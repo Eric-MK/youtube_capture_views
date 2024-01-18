@@ -31,7 +31,7 @@ def get_youtube_data(api_key, video_id):
         return None
 
 def main():
-    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'
+    api_key = 'Put your api key'
     video_id = 'cq3jNiquchw'  # Replace with your actual video ID
 
     video_data = get_youtube_data(api_key, video_id)
