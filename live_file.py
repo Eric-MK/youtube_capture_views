@@ -11,7 +11,7 @@ def get_youtube_data(api_key, *video_ids):
         video_response = youtube.videos().list(part='snippet,liveStreamingDetails', id=video_id).execute()
         
         
-        print(video_response)
+        
         
         # Check if 'items' is present in the response and not empty
         if 'items' in video_response and video_response['items']:
@@ -36,11 +36,12 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = 'add youtube api key'
+    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'
     
-    ktn_home = "3HKRlDRWdbc"
-    ktn_news = "OdIxeE2eWSg"
-    citizen_news = "cq3jNiquchw"
+    ktn_home = "0HL14aKXsCY"
+    ktn_news = "0HL14aKXsCY"
+    citizen_news = "Bqv4O9x6a9U"
+    
     
     video_ids = [citizen_news, ktn_news , ktn_home]  
 
