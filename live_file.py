@@ -34,7 +34,7 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = ''
+    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'
     
     ktn_home = "0HL14aKXsCY"
     ktn_news = "0HL14aKXsCY"
@@ -42,7 +42,9 @@ def main():
     
     video_ids = [citizen_news, ktn_news , ktn_home]
     
-    while True:  # Loop indefinitely
+    capture_count = 0  # Initialize capture count
+    
+    while capture_count < 3:  # Loop until 3 captures are completed
         videos_data = get_youtube_data(api_key, *video_ids)
         
         if videos_data:
@@ -55,8 +57,13 @@ def main():
             
             print(f"Video data has been saved to {excel_filename}")
         
-        print("Waiting for the next update in 10 minutes...")
-        time.sleep(600)  # Wait for 600 seconds (10 minutes) before the next iteration
+        capture_count += 1  # Increment the capture count
+        
+        if capture_count < 3:  # Check if we should continue
+            print("Waiting for the next update in 10 minutes...")
+            time.sleep(600)  # Wait for 600 seconds (10 minutes) before the next iteration
+        else:
+            print("Completed 3 captures. Exiting...")
 
 if __name__ == "__main__":
     main()
