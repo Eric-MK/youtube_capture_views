@@ -34,36 +34,41 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'
+    api_key = ''  # Use your actual API key
     
-    ktn_home = "0HL14aKXsCY"
+    ktn_home = "SBxgLlZNebs"
     ktn_news = "0HL14aKXsCY"
-    citizen_news = "Bqv4O9x6a9U"
+    citizen_news = "YNN2atp2MoY"
     
     video_ids = [citizen_news, ktn_news , ktn_home]
     
     capture_count = 0  # Initialize capture count
-    
+    all_intervals_data = []  # Initialize empty list to store data from all intervals
+
     while capture_count < 3:  # Loop until 3 captures are completed
         videos_data = get_youtube_data(api_key, *video_ids)
         
         if videos_data:
-            df = pd.DataFrame(videos_data)
-            
-            # Generating a timestamped filename
-            timestamp = time.strftime("%Y%m%d-%H%M%S")
-            excel_filename = f'output/youtube_live_data_{timestamp}.xlsx'
-            df.to_excel(excel_filename, index=False)
-            
-            print(f"Video data has been saved to {excel_filename}")
+            # Add a timestamp or interval identifier to each row of data
+            timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+            for data in videos_data:
+                data['Capture Time'] = timestamp
+            all_intervals_data.extend(videos_data)
         
         capture_count += 1  # Increment the capture count
         
         if capture_count < 3:  # Check if we should continue
             print("Waiting for the next update in 10 minutes...")
-            time.sleep(600)  # Wait for 600 seconds (10 minutes) before the next iteration
+            time.sleep(60)  # Wait for 600 seconds (10 minutes) before the next iteration
         else:
-            print("Completed 3 captures. Exiting...")
+            print("Completed 3 captures.")
+    
+    # After collecting all data, save to a single Excel file
+    if all_intervals_data:
+        df = pd.DataFrame(all_intervals_data)
+        excel_filename = 'output/youtube_live_data.xlsx'
+        df.to_excel(excel_filename, index=False)
+        print(f"All video data has been saved to {excel_filename}")
 
 if __name__ == "__main__":
     main()
