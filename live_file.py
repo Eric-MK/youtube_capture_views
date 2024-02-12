@@ -34,7 +34,7 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'  # Use your actual API key
+    api_key = ''  # Use your actual API key
     
     ktn_home = "SBxgLlZNebs"
     ktn_news = "0HL14aKXsCY"
