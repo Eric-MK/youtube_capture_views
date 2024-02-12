@@ -25,7 +25,6 @@ def get_youtube_data(api_key, *video_ids):
                 'Author': video_details.get('channelTitle', ''),
                 'Published Date': video_details.get('publishedAt', ''),
                 'Description': video_details.get('description', ''),
-                'Thumbnail URL': video_details['thumbnails']['default']['url'] if 'thumbnails' in video_details else '',
             }
 
             all_data.append(data)
