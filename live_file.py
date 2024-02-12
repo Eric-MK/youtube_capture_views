@@ -1,6 +1,7 @@
 import pandas as pd
 from googleapiclient.discovery import build
 import time  # Import the time module
+import os  # Import the os module for file existence check
 
 def get_youtube_data(api_key, *video_ids):
     youtube = build('youtube', 'v3', developerKey=api_key)
@@ -34,7 +35,7 @@ def get_youtube_data(api_key, *video_ids):
     return all_data
 
 def main():
-    api_key = ''  # Use your actual API key
+    api_key = 'AIzaSyA70PJAcyWR0UbGUq98E8fpD_-ysHSuLKo'  # Use your actual API key
     
     ktn_home = "SBxgLlZNebs"
     ktn_news = "0HL14aKXsCY"
@@ -43,7 +44,7 @@ def main():
     video_ids = [citizen_news, ktn_news , ktn_home]
     
     capture_count = 0  # Initialize capture count
-    all_intervals_data = []  # Initialize empty list to store data from all intervals
+    excel_filename = 'output/youtube_live_data.xlsx'  # Define the Excel filename
 
     while capture_count < 3:  # Loop until 3 captures are completed
         videos_data = get_youtube_data(api_key, *video_ids)
@@ -53,7 +54,19 @@ def main():
             timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
             for data in videos_data:
                 data['Capture Time'] = timestamp
-            all_intervals_data.extend(videos_data)
+            
+            # Check if the Excel file already exists
+            if os.path.exists(excel_filename):
+                # Read the existing data
+                existing_df = pd.read_excel(excel_filename)
+                new_df = pd.DataFrame(videos_data)
+                updated_df = pd.concat([existing_df, new_df], ignore_index=True)
+            else:
+                updated_df = pd.DataFrame(videos_data)
+            
+            # Save the updated data back to the Excel file
+            updated_df.to_excel(excel_filename, index=False)
+            print(f"Video data has been saved/updated to {excel_filename}")
         
         capture_count += 1  # Increment the capture count
         
@@ -62,13 +75,6 @@ def main():
             time.sleep(60)  # Wait for 600 seconds (10 minutes) before the next iteration
         else:
             print("Completed 3 captures.")
-    
-    # After collecting all data, save to a single Excel file
-    if all_intervals_data:
-        df = pd.DataFrame(all_intervals_data)
-        excel_filename = 'output/youtube_live_data.xlsx'
-        df.to_excel(excel_filename, index=False)
-        print(f"All video data has been saved to {excel_filename}")
 
 if __name__ == "__main__":
     main()
